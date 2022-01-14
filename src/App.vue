@@ -1,28 +1,53 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      src="./assets/background.jpg"
+      dark
+    >
+      <v-toolbar-title class="text-no-wrap"> Discover Pictures </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <!-- pictures in card view -->
+    <v-container fluid>
+      <v-row dense justify="center">
+        <v-col
+          v-for="photo in photos"
+          :key="photo.title"
+          cols="12"
+          xs="12"
+          sm="10"
+          md="8"
+        >
+          <PhotoCard 
+            v-bind="photo"
+          ></PhotoCard>
+        </v-col>
+      </v-row>
+    </v-container>
+            
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PhotoCard from './components/PhotoCard';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    PhotoCard,
+  },
+
+  data: () => ({
+    photos: [
+        { title: 'Sun', desc: 'Lorem Ipsum', date: '2022-1-14' },
+        { title: 'Nebula', desc: 'Lorem Ipsum', date: '2022-01-15' },
+        { title: 'Milky Way', desc: 'Lorem Ipsum', date: '2022-01-15' },
+      ]
+  }),
+};
+</script>
