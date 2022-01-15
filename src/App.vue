@@ -43,11 +43,17 @@ export default {
   },
 
   data: () => ({
-    photos: [
-        { title: 'Sun', desc: 'Lorem Ipsum', date: '2022-1-14' },
-        { title: 'Nebula', desc: 'Lorem Ipsum', date: '2022-01-15' },
-        { title: 'Milky Way', desc: 'Lorem Ipsum', date: '2022-01-15' },
-      ]
+    //
   }),
+
+  computed: {
+    photos() {
+      return this.$store.state.photos.all
+    }
+  },
+
+  created() {
+    this.$store.dispatch('photos/getAllPhotos')
+  }
 };
 </script>

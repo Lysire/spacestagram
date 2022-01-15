@@ -8,8 +8,12 @@
     </v-img>
 
     <v-card-title>
-      {{ title }}: {{ date }}
+      {{ title }}
     </v-card-title>
+
+    <v-card-subtitle>
+      {{ date }}
+    </v-card-subtitle>
 
     <v-card-actions>
       <template v-if="isLiked">
