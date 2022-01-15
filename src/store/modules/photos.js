@@ -11,7 +11,7 @@ const getters = {}
 
 // actions
 const actions = {
-    getAllPhotos({ commit }) {
+    getMorePhotos({ commit }) {
         api.getFromApi(photos => {
             commit('addPhotos', photos)
         })

@@ -4,7 +4,7 @@
       src="./assets/background.jpg"
       dark
     >
-      <v-toolbar-title class="text-no-wrap"> Discover Pictures </v-toolbar-title>
+      <v-toolbar-title class="text-no-wrap"> Discover Astronomy Photos </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -16,7 +16,7 @@
       <v-row dense justify="center">
         <v-col
           v-for="photo in photos"
-          :key="photo.title"
+          :key="photo.date"
           cols="12"
           xs="12"
           sm="10"
@@ -34,6 +34,7 @@
 
 <script>
 import PhotoCard from './components/PhotoCard';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -46,14 +47,12 @@ export default {
     //
   }),
 
-  computed: {
-    photos() {
-      return this.$store.state.photos.all
-    }
-  },
+  computed: mapState({
+    photos: state => state.photos.all
+  }),
 
   created() {
-    this.$store.dispatch('photos/getAllPhotos')
+    this.$store.dispatch('photos/getMorePhotos')
   }
 };
 </script>
