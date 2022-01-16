@@ -1,11 +1,14 @@
 // initial state
-// for persisting likes, we store the object
 const state = () => ({
-    liked: [],
+    liked: [], // each photo is identified with its date (id)
 })
 
 // getters
 const getters = {
+    getIsLiked: state => ({ dateId }) => {
+        return state.liked.findIndex(item => item === dateId) != -1
+    },
+
     getLikedPhotos: (state) => {
         return state.liked
     }
@@ -13,23 +16,23 @@ const getters = {
 
 // actions
 const actions = {
-    addLiked({ commit }, photo) {
-        commit('saveToLiked', photo)
+    addLiked({ commit }, { dateId }) {
+        commit('saveToLiked', dateId)
     },
 
-    removeLiked({ commit }, photo) {
-        commit('deleteFromLiked', photo)
+    removeLiked({ commit }, { dateId }) {
+        commit('deleteFromLiked', dateId)
     }
 }
 
 // mutations
 const mutations = {
-    saveToLiked(state, photo) {
-        state.liked.push(photo)
+    saveToLiked(state, dateId) {
+        state.liked.push(dateId)
     },
 
-    deleteFromLiked(state, photo) {
-        const idxToDelete = state.liked.findIndex(item => item.date === photo.date)
+    deleteFromLiked(state, dateId) {
+        const idxToDelete = state.liked.findIndex(item => item === dateId)
         if (idxToDelete != -1) {
             state.liked.splice(idxToDelete, 1)
         }

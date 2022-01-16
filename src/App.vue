@@ -20,7 +20,7 @@
           cols="12"
           xs="12"
           sm="10"
-          md="8"
+          md="9"
         >
           <PhotoCard 
             v-bind="photo"
@@ -42,10 +42,6 @@ export default {
   components: {
     PhotoCard,
   },
-
-  data: () => ({
-    //
-  }),
 
   computed: mapState({
     photos: state => state.photos.all

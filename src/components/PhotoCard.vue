@@ -29,23 +29,23 @@
     </v-card-subtitle>
 
     <v-card-actions>
-      <template v-if="isLiked">
+      <template v-if="!isLiked(getDateIdObj)">
         <v-btn
           color="red lighten-1"
-          dark
-          @click="isLiked = !isLiked; addLiked(getCorrObject)"
+          outlined
+          @click="addLiked(getDateIdObj)"
         > 
-          Liked 
+          Like 
         </v-btn>
       </template>
 
       <template v-else>
         <v-btn
           color="red lighten-1"
-          outlined
-          @click="isLiked = !isLiked; removeLiked(getCorrObject)"
+          dark
+          @click="removeLiked(getDateIdObj)"
         >
-          Like
+          Liked
         </v-btn>
       </template>
 
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
   export default {
     name: 'PhotoCard',
 
@@ -83,24 +84,26 @@
     },
 
     computed: {
-      getCorrObject() {
-        return { title: this.title, date: this.date, desc: this.desc, src: this.src }
-      }
+      getDateIdObj() {
+        return { dateId: this.date }
+      },
+      ...mapGetters('liked', {
+        isLiked: 'getIsLiked'
+      }),
     },
 
     methods: {
-      addLiked(photo) {
-        this.$store.dispatch('liked/addLiked', photo)
+      addLiked(dateIdObj) {
+        this.$store.dispatch('liked/addLiked', dateIdObj)
       },
 
-      removeLiked(photo) {
-        this.$store.dispatch('liked/removeLiked', photo)
+      removeLiked(dateIdObj) {
+        this.$store.dispatch('liked/removeLiked', dateIdObj)
       }
     },
 
     data: () => ({
       isExpand: false,
-      isLiked: false,
     }),
   }
 </script>
