@@ -14,9 +14,6 @@
       <v-btn icon>
         <v-icon>mdi-heart-outline</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-shuffle</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <!-- pictures in card view -->
@@ -33,6 +30,8 @@ import GoTopButton from './components/Buttons/GoTopButton';
 
 import { mapState } from 'vuex';
 
+let debounce = require('lodash.debounce')
+
 export default {
   name: 'App',
 
@@ -45,13 +44,30 @@ export default {
     photos: state => state.photos.all
   }),
 
-  created() {
-    this.$store.dispatch('photos/getMorePhotos')
+  methods: {
+    getMoreData() {
+      window.onscroll = debounce(() => {
+        let isBottom = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+        if (isBottom) {
+          this.$store.dispatch('photos/getMorePhotos')
+        }
+      }, 200);
+    }
+  },
 
+  created() {
     window.addEventListener('beforeunload', e => {
       window.sessionStorage.setItem("likes", JSON.stringify(this.$store.state.liked.likedIds))
       e.returnValue("")
     })
+  },
+
+  beforeMount() {
+    this.$store.dispatch('photos/getMorePhotos')
+  }, 
+
+  mounted() {
+    this.getMoreData()
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row dense justify="center">
+    <v-row justify="center">
       <v-col
         v-for="photo in photolist"
         :key="photo.date"
@@ -8,16 +8,18 @@
         sm="6"
         md="4"
       >
-        <photo-card 
+        <card-image :src="photo.src"></card-image>
+        <!-- <photo-card 
           v-bind="photo"
-        ></photo-card>
+        ></photo-card> -->
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import PhotoCard from './PhotoCard'
+// import PhotoCard from './PhotoCard'
+import CardImage from './CardAssets/CardImage'
 
 export default {
   props: {
@@ -25,7 +27,8 @@ export default {
   }, 
 
   components: {
-    PhotoCard
+    // PhotoCard
+    CardImage
   }
 }
 </script>

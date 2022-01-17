@@ -2,8 +2,6 @@
   <v-card
     class="mx-auto"
     elevation="10"
-    max-width="600"
-    max-height="700"
   >
     <card-image :src="src" />
 
