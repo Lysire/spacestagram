@@ -1,0 +1,39 @@
+<template>
+  <v-fab-transition>
+    <v-btn
+      v-show="visible"
+      v-scroll="onScroll"
+      @click="goBackTop"
+      color="primary"
+      fixed
+      fab
+      dark
+      bottom
+      right
+    >
+      <v-icon>mdi-arrow-up-bold</v-icon>
+    </v-btn>
+  </v-fab-transition>
+</template>
+
+<script>
+let debounce = require('lodash.debounce')
+
+export default {
+  data: () => ({
+    visible: false,
+  }),
+
+  methods: {
+    onScroll: debounce(function (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.visible = top > 30
+    }, 250),
+    
+    goBackTop() {
+      this.$vuetify.goTo(0)
+    }
+  }
+}
+</script>

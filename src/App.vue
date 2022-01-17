@@ -1,46 +1,44 @@
 <template>
   <v-app>
     <v-app-bar
-      src="./assets/background.jpg"
+      color='primary'
       dark
     >
       <v-toolbar-title class="text-no-wrap"> Discover Astronomy Photos </v-toolbar-title>
       <v-spacer></v-spacer>
+
+      <!-- refactor later -->
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-heart-outline</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-shuffle</v-icon>
       </v-btn>
     </v-app-bar>
 
     <!-- pictures in card view -->
-    <v-container fluid>
-      <v-row dense justify="center">
-        <v-col
-          v-for="photo in photos"
-          :key="photo.date"
-          cols="12"
-          xs="12"
-          sm="10"
-          md="9"
-        >
-          <PhotoCard 
-            v-bind="photo"
-          ></PhotoCard>
-        </v-col>
-      </v-row>
-    </v-container>
+    <photo-card-list :photolist="photos" />
+    
+    <go-top-button />
             
   </v-app>
 </template>
 
 <script>
-import PhotoCard from './components/PhotoCard';
+import PhotoCardList from './components/PhotoCardList';
+import GoTopButton from './components/Buttons/GoTopButton';
+
 import { mapState } from 'vuex';
 
 export default {
   name: 'App',
 
   components: {
-    PhotoCard,
+    PhotoCardList,
+    GoTopButton,
   },
 
   computed: mapState({
@@ -49,6 +47,11 @@ export default {
 
   created() {
     this.$store.dispatch('photos/getMorePhotos')
+
+    window.addEventListener('beforeunload', e => {
+      window.sessionStorage.setItem("likes", JSON.stringify(this.$store.state.liked.likedIds))
+      e.returnValue("")
+    })
   }
 };
 </script>

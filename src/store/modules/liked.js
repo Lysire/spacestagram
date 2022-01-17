@@ -1,16 +1,19 @@
+import { getFromStorage } from '@/api/all'
+
 // initial state
+let initLikes = getFromStorage()
 const state = () => ({
-    liked: [], // each photo is identified with its date (id)
+    likedIds: initLikes, // each photo is identified with its date (id)
 })
 
 // getters
 const getters = {
     getIsLiked: state => ({ dateId }) => {
-        return state.liked.findIndex(item => item === dateId) != -1
+        return state.likedIds.findIndex(item => item === dateId) != -1
     },
 
     getLikedPhotos: (state) => {
-        return state.liked
+        return state.likedIds
     }
 }
 
@@ -28,13 +31,13 @@ const actions = {
 // mutations
 const mutations = {
     saveToLiked(state, dateId) {
-        state.liked.push(dateId)
+        state.likedIds.push(dateId)
     },
 
     deleteFromLiked(state, dateId) {
-        const idxToDelete = state.liked.findIndex(item => item === dateId)
+        const idxToDelete = state.likedIds.findIndex(item => item === dateId)
         if (idxToDelete != -1) {
-            state.liked.splice(idxToDelete, 1)
+            state.likedIds.splice(idxToDelete, 1)
         }
     }
 }

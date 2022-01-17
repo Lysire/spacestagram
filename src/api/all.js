@@ -1,6 +1,16 @@
 import axios from 'axios';
 
-// api configurations
+// api for getting from storage
+const getFromStorage = () => {
+    let val = sessionStorage.getItem("likes")
+    if (val) {
+        return JSON.parse(val)
+    } else {
+        return []
+    }
+}
+
+// nasa api configurations
 const url = 'https://api.nasa.gov/planetary/apod'
 const params = {
     api_key: "DEMO_KEY",
@@ -29,6 +39,7 @@ async function getFromApi(callback) {
     callback(result)
 }
 
-export default {
+export {
+    getFromStorage,
     getFromApi
 }

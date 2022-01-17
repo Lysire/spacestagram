@@ -1,4 +1,4 @@
-import api from '../../api/spaceapi'
+import { getFromApi } from '@/api/all'
 
 // initial state
 const state = () => ({
@@ -12,7 +12,7 @@ const getters = {}
 // actions
 const actions = {
     getMorePhotos({ commit }) {
-        api.getFromApi(photos => {
+        getFromApi(photos => {
             commit('addPhotos', photos)
         })
     }
