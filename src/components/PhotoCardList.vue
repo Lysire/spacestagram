@@ -8,10 +8,11 @@
         sm="6"
         md="4"
       >
-        <card-image :src="photo.src"></card-image>
-        <!-- <photo-card 
-          v-bind="photo"
-        ></photo-card> -->
+        <card-image 
+          :isStandAlone="true" 
+          :src="photo.src"
+          :ratio="1"
+        ></card-image>
       </v-col>
     </v-row>
   </v-container>

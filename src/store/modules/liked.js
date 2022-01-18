@@ -1,4 +1,4 @@
-import { getFromStorage } from '@/api/all'
+import getFromStorage from '@/api/storage'
 
 // initial state
 let initLikes = getFromStorage()

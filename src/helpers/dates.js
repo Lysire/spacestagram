@@ -1,19 +1,12 @@
-// returns function that calculates the new date 
-// ranges given a certain length
-const dateCalculatorGetter = (length) => {
-    let date_ptr = new Date();
+const dateFormat = 'YYYY-MM-DD'
+let dayjs = require('dayjs')
 
-    return () => {
-        const start_date = (date_ptr.getDate() - length).split("T")[0]
-        const end_date = date_ptr.toISOString().split("T")[0]
-        console.log(start_date)
-        console.log(end_date)
-        date_ptr.setDate(date_ptr.getDate() - (length + 1)) // update ptr
-        console.log(date_ptr.toDateString())
-        return [start_date, end_date]
-    }
-}
+// returns a new date range of given length starting
+// from offset days ago
+function getDateRange(offset, length) {
+    const end_date = dayjs().subtract(offset, 'days').format(dateFormat);
+    const start_date = dayjs().subtract(offset + length, 'days').format(dateFormat);
+    return [start_date, end_date];
+} 
 
-export default {
-    dateCalculatorGetter
-}
+export default getDateRange

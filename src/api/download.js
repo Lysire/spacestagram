@@ -1,31 +1,30 @@
+import getDateRange from '../helpers/dates'
+
 import axios from 'axios';
 
-// api for getting from storage
-const getFromStorage = () => {
-    let val = sessionStorage.getItem("likes")
-    if (val) {
-        return JSON.parse(val)
-    } else {
-        return []
-    }
-}
+// date configurations
+const duration = 9
+let offset = 0
+let [start, end] = getDateRange(offset, duration)
 
 // nasa api configurations
 const url = 'https://api.nasa.gov/planetary/apod'
-const params = {
+let params = {
     api_key: "DEMO_KEY",
     thumbs: true,
-    start_date: "2022-1-9",
-    end_date: "2022-1-14",
+    start_date: start,
+    end_date: end,
 }
 
-async function getFromApi(callback) {
+async function getFromNasaApi(callback) {
+    console.log(params)
     let result = (await axios.get(url, {params: params})).data
     // put single object into array
     if (Object.prototype.toString.call(result) === "[object Object]") {
         result = [result]
     }
     result.reverse() // latest ones first
+
     // process for viewing on photo card
     result.forEach((item, idx) => {
         let changed;
@@ -36,10 +35,14 @@ async function getFromApi(callback) {
         }
         result[idx] = changed
     })
+
+    // update dates
+    offset += (duration + 1)
+    const [start, end] = getDateRange(offset, duration)
+    params['start_date'] = start
+    params['end_date'] = end
+
     callback(result)
 }
 
-export {
-    getFromStorage,
-    getFromApi
-}
+export default getFromNasaApi

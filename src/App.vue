@@ -47,11 +47,12 @@ export default {
   methods: {
     getMoreData() {
       window.onscroll = debounce(() => {
-        let isBottom = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+        let isBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
+        console.log(isBottom)
         if (isBottom) {
           this.$store.dispatch('photos/getMorePhotos')
         }
-      }, 200);
+      }, 10)
     }
   },
 

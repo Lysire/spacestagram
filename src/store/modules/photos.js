@@ -1,4 +1,4 @@
-import { getFromApi } from '@/api/all'
+import getFromNasaApi from '@/api/download'
 
 // initial state
 const state = () => ({
@@ -12,7 +12,7 @@ const getters = {}
 // actions
 const actions = {
     getMorePhotos({ commit }) {
-        getFromApi(photos => {
+        getFromNasaApi(photos => {
             commit('addPhotos', photos)
         })
     }

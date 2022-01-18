@@ -1,26 +1,40 @@
 <template>
-  <v-card>
-    <v-img
-      :src="src"
-      aspect-ratio="1"
-    >
-      <template v-slot:placeholder>
-        <v-row
-          class="fill-height ma-0"
-          align="center"
-          justify="center"
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card>
+        <v-img
+          :src="src"
+          aspect-ratio="1"
         >
-          <v-progress-circular
-            indeterminate
-            :color="color"
-          ></v-progress-circular>
-        </v-row>
-      </template>
-    </v-img>
+          <template v-slot:placeholder>
+            <v-row
+              class="fill-height ma-0"
+              align="center"
+              justify="center"
+            >
+              <v-progress-circular
+                indeterminate
+                :color="color"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
 
-    <!-- v-if for overlay to reuse component in PhotoCard -->
+        <!-- show overlay if it's in grid -->
+        <template v-if="isStandAlone">
+          <v-fade-transition>
+            <v-overlay
+              v-if="hover"
+              absolute
+            >
+              <v-btn plain>Find Out More</v-btn>
+            </v-overlay>
+          </v-fade-transition>
+        </template>
 
-  </v-card>
+      </v-card>
+    </template>
+  </v-hover>
 </template>
 
 <script>
@@ -29,7 +43,9 @@ export default {
 
   props: {
     src: {type: String},
-    color: {type: String, default: "black lighten-5"}
+    ratio: {type: Number, default: undefined},
+    color: {type: String, default: "black lighten-5"},
+    isStandAlone: {type: Boolean, default: false}
   }
 }
 </script>
