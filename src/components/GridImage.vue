@@ -26,9 +26,7 @@
           <v-container fluid>
             <v-row class="d-flex align-center justify-center">
               <v-col :cols="10">
-                <v-card>
                   <photo-card v-bind="photo" />
-                </v-card>
               </v-col>
             </v-row>
           </v-container>

@@ -29,7 +29,7 @@ export default {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
       this.visible = top > 30
-    }, 250),
+    }, 500),
     
     goBackTop() {
       this.$vuetify.goTo(0)
