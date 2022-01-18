@@ -8,19 +8,14 @@
         sm="6"
         md="4"
       >
-        <card-image 
-          :isStandAlone="true" 
-          :src="photo.src"
-          :ratio="1"
-        ></card-image>
+        <grid-image :photo="photo" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-// import PhotoCard from './PhotoCard'
-import CardImage from './CardAssets/CardImage'
+import GridImage from './GridImage'
 
 export default {
   props: {
@@ -28,8 +23,7 @@ export default {
   }, 
 
   components: {
-    // PhotoCard
-    CardImage
+    GridImage
   }
 }
 </script>

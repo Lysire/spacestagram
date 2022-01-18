@@ -17,7 +17,6 @@ let params = {
 }
 
 async function getFromNasaApi(callback) {
-    console.log(params)
     let result = (await axios.get(url, {params: params})).data
     // put single object into array
     if (Object.prototype.toString.call(result) === "[object Object]") {

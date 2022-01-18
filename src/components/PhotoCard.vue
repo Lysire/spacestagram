@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import CardImage from './CardAssets/CardImage'
+import CardImage from './Image/CardImage'
 import ExpandButton from './Buttons/ExpandButton'
 
 import { mapGetters } from 'vuex';

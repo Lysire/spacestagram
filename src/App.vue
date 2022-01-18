@@ -7,7 +7,6 @@
       <v-toolbar-title class="text-no-wrap"> Discover Astronomy Photos </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <!-- refactor later -->
       <v-btn icon>
         <v-icon>mdi-home</v-icon>
       </v-btn>
@@ -17,7 +16,7 @@
     </v-app-bar>
 
     <!-- pictures in card view -->
-    <photo-card-list :photolist="photos" />
+    <grid-image-list :photolist="photos" />
     
     <go-top-button />
             
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import PhotoCardList from './components/PhotoCardList';
+import GridImageList from './components/GridImageList';
 import GoTopButton from './components/Buttons/GoTopButton';
 
 import { mapState } from 'vuex';
@@ -36,7 +35,7 @@ export default {
   name: 'App',
 
   components: {
-    PhotoCardList,
+    GridImageList,
     GoTopButton,
   },
 
