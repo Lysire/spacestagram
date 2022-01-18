@@ -6,6 +6,7 @@
 
         <v-fade-transition>
           <v-overlay
+            z-index="0"
             v-if="hover"
             absolute
           >
