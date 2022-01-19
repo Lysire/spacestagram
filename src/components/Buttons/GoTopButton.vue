@@ -4,7 +4,7 @@
       v-show="visible"
       v-scroll="onScroll"
       @click="goBackTop"
-      color="black"
+      color="black lighten-3"
       fixed
       fab
       dark

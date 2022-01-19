@@ -34,6 +34,17 @@
         </v-btn>
       </template>
 
+      <v-btn
+        icon
+        color="white"
+        top
+        right
+        absolute
+        @click="$emit('close-dialog')"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+
       <v-spacer></v-spacer>
       <expand-button @expand-text="expandListener" />
 

@@ -4,34 +4,35 @@
       <v-card>
         <card-image :src="photo.src" :ratio="1"/>
 
-        <v-fade-transition>
-          <v-overlay
-            z-index="0"
-            v-if="hover"
-            absolute
-          >
-            <v-btn 
-              plain
-              @click="dialog = true"
-            >
-              Find Out More
-            </v-btn>
-          </v-overlay>
-        </v-fade-transition>
-          
         <v-dialog
           v-model="dialog"
-          fullscreen
+          width="75%"
         >
-          <v-container fluid>
-            <v-row class="d-flex align-center justify-center">
-              <v-col :cols="10">
-                  <photo-card v-bind="photo" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-dialog>
+          <template v-slot:activator="{ on, attrs }">
+            <v-fade-transition>
+              <v-overlay
+                z-index="0"
+                v-if="hover"
+                absolute
+              >
+                <v-btn
+                  plain
+                  v-bind="attrs"
+                  v-on="on"
+                  v-if="hover"
+                >
+                  Find Out More
+                </v-btn>
+              </v-overlay>
+            </v-fade-transition>
+          </template>
+          
+          <photo-card 
+            v-bind="photo" 
+            @close-dialog="dialog = false" 
+          />
 
+        </v-dialog>
       </v-card>
     </template>
   </v-hover>
@@ -58,3 +59,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+</style>

@@ -2,6 +2,7 @@
   <v-img
     :src="src"
     :aspect-ratio="ratio"
+    max-height="65vh"
   >
     <template v-slot:placeholder>
       <photo-loading-icon />
