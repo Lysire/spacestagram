@@ -12,8 +12,10 @@ const getters = {
         return state.likedIds.findIndex(item => item === dateId) != -1
     },
 
-    getLikedPhotos: (state) => {
-        return state.likedIds
+    getLikedPhotos: (state, getters, rootState) => {
+        return state.likedIds.map((dateId) => {
+            return rootState.photos.all.find(photo => photo.date === dateId)
+        })
     }
 }
 

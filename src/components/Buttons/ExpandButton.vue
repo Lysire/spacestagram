@@ -1,8 +1,8 @@
 <template>
-    <v-btn
-      icon
-      @click="onClick"
-    >
+  <v-btn
+    icon
+    @click="onClick"
+  >
     <v-icon> {{ isExpand ? 'mdi-chevron-up' : 'mdi-chevron-down'}} </v-icon>
   </v-btn>
 </template>

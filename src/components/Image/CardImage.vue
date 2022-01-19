@@ -4,19 +4,19 @@
     :aspect-ratio="ratio"
   >
     <template v-slot:placeholder>
-      <loading-icon />
+      <photo-loading-icon />
     </template>
   </v-img>
 </template>
 
 <script>
-import LoadingIcon from './LoadingIcon'
+import PhotoLoadingIcon from './PhotoLoadingIcon'
 
 export default {
   name: 'CardImage',
 
   components: {
-    LoadingIcon
+    PhotoLoadingIcon
   },
 
   props: {

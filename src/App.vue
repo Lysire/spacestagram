@@ -2,29 +2,25 @@
   <v-app v-scroll="getMoreData">
     <v-app-bar
       app
-      color='primary'
       dark
     >
-      <v-toolbar-title class="text-no-wrap"> Discover Astronomy Photos </v-toolbar-title>
+      <v-toolbar-title class="text-no-wrap"> Spacestagram </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-heart-outline</v-icon>
-      </v-btn>
+      <home-button @back-home="isFavourites = false" />
+      <favourites-button @toggle-favs="isFavourites = !isFavourites" />
+
     </v-app-bar>
 
-    <!-- pictures in card view -->
-    <template v-if="isLoading">
-      <v-progress-circular v-show="isLoading"
-        indeterminate
-        color="grey-lighten-5"
-      ></v-progress-circular>
-    </template>
+    <v-main class="grey lighten-1">
+      <template v-if="isFavourites">
+        <grid-image-list :photolist="likedphotos" />
+      </template>
 
-    <grid-image-list :photolist="photos" />
+      <template v-else>
+        <grid-image-list :photolist="photos" />
+      </template>
+    </v-main>
 
     <go-top-button />
             
@@ -32,10 +28,14 @@
 </template>
 
 <script>
-import GridImageList from './components/GridImageList';
-import GoTopButton from './components/Buttons/GoTopButton';
+import GridImageList from './components/GridImageList'
 
-import { mapState } from 'vuex';
+import HomeButton from './components/Buttons/HomeButton'
+import FavouritesButton from './components/Buttons/FavouritesButton'
+
+import GoTopButton from './components/Buttons/GoTopButton'
+
+import { mapState, mapGetters } from 'vuex';
 
 let debounce = require('lodash.debounce')
 
@@ -45,23 +45,30 @@ export default {
   components: {
     GridImageList,
     GoTopButton,
+    HomeButton,
+    FavouritesButton
   },
 
   data: function() {
     return {
       isLoading: true,
+      isFavourites: false,
     }
   },
 
-  computed: mapState({
-    photos: state => state.photos.all
-  }),
+  computed: {
+    ...mapState({
+      photos: state => state.photos.all
+    }),
+    ...mapGetters('liked', {
+      likedphotos: 'getLikedPhotos'
+    })
+  },
 
   methods: {
     getMoreData: debounce(function() {
       let scrolledSoFar = document.documentElement.scrollTop + window.innerHeight
       let threshold = 0.95 * document.documentElement.offsetHeight
-      console.log(scrolledSoFar + ' ' + threshold)
       if ((scrolledSoFar > threshold) && !this.isLoading) {
         this.isLoading = true
         this.$store.dispatch('photos/getMorePhotos')

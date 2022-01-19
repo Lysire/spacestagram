@@ -6,13 +6,13 @@
   >
     <v-progress-circular
       indeterminate
-      color="grey-lighten-5"
+      color="grey lighten-1"
     ></v-progress-circular>
   </v-row>
 </template>
 
 <script>
 export default {
-  name: 'LoadingIcon'
+  name: 'PhotoLoadingIcon'
 }
 </script>
