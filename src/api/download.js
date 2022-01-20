@@ -10,7 +10,7 @@ let [start, end] = getDateRange(offset, duration)
 // nasa api configurations
 const url = 'https://api.nasa.gov/planetary/apod'
 let params = {
-    api_key: "DEMO_KEY",
+    api_key: process.env.API_KEY,
     thumbs: true,
     start_date: start,
     end_date: end,
