@@ -4,14 +4,15 @@
       <v-col
         v-for="photo in photolist"
         :key="photo.date"
-        xs="8"
+        cols="12"
+        xs="10"
         sm="6"
         md="4"
       >
         <grid-image :photo="photo" />
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> 
 </template>
 
 <script>
@@ -19,7 +20,7 @@ import GridImage from './GridImage'
 
 export default {
   props: {
-    photolist: {required: true, type: Array}
+    photolist: {type: Array, required: true}
   }, 
 
   components: {

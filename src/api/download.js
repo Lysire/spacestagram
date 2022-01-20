@@ -17,7 +17,17 @@ let params = {
 }
 
 async function getFromNasaApi(callback) {
-    let result = (await axios.get(url, {params: params})).data
+    let response = (await axios.get(url, {params: params}))
+
+    // don't do anything if requested resp not obtained
+    if (response.status != 200) {
+        callback(null)
+        return
+    }
+
+    const dateId = params['end_date']
+    let result = response.data
+
     // put single object into array
     if (Object.prototype.toString.call(result) === "[object Object]") {
         result = [result]
@@ -41,7 +51,7 @@ async function getFromNasaApi(callback) {
     params['start_date'] = start
     params['end_date'] = end
 
-    callback(result)
+    callback(dateId, result)
 }
 
 export default getFromNasaApi

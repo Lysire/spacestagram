@@ -4,7 +4,11 @@
       app
       dark
     >
-      <v-toolbar-title class="text-no-wrap"> Spacestagram </v-toolbar-title>
+      <v-toolbar-title 
+        class="text-no-wrap"
+        id="title"
+      > 
+        Spacestagram </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <home-button @back-home="isFavourites = false" />
@@ -18,7 +22,7 @@
       </template>
 
       <template v-else>
-        <grid-image-list :photolist="photos" />
+        <grid-image-list :photolist="photos" :isloading="isloading" />
       </template>
     </v-main>
 
@@ -51,8 +55,8 @@ export default {
 
   data: function() {
     return {
-      isLoading: true,
       isFavourites: false,
+      isloading: false,
     }
   },
 
@@ -68,13 +72,11 @@ export default {
   methods: {
     getMoreData: debounce(function() {
       let scrolledSoFar = document.documentElement.scrollTop + window.innerHeight
-      let threshold = 0.95 * document.documentElement.offsetHeight
-      if ((scrolledSoFar > threshold) && !this.isLoading) {
-        this.isLoading = true
+      let threshold = document.documentElement.offsetHeight
+      if ((Math.ceil(scrolledSoFar) === threshold)) {
         this.$store.dispatch('photos/getMorePhotos')
-        this.isLoading = false
       }
-    }, 300),
+    }, 450),
   },
 
   created() {
@@ -85,9 +87,15 @@ export default {
   },
 
   beforeMount() {
-    this.isLoading = true
     this.$store.dispatch('photos/getMorePhotos')
-    this.isLoading = false
   }, 
 };
 </script>
+
+<style scoped>
+#title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.75rem;
+  font-weight: 450;
+}
+</style>

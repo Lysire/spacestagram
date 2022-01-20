@@ -17,20 +17,20 @@
       <template v-if="!isLiked(getDateIdObj)">
         <v-btn
           color="red lighten-1"
-          outlined
+          icon
           @click="addLiked(getDateIdObj)"
         > 
-          Like 
+          <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
       </template>
 
       <template v-else>
         <v-btn
           color="red lighten-1"
-          dark
+          icon
           @click="removeLiked(getDateIdObj)"
         >
-          Liked
+          <v-icon>mdi-heart</v-icon>
         </v-btn>
       </template>
 
