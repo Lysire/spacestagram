@@ -19,6 +19,8 @@
 import GridImage from './GridImage'
 
 export default {
+  name: 'GridImageList',
+
   props: {
     photolist: {type: Array, required: true}
   }, 

@@ -71,6 +71,7 @@ export default {
 
   methods: {
     getMoreData: debounce(function() {
+      if (this.isFavourites) { return } // prevent download in favourites
       let scrolledSoFar = document.documentElement.scrollTop + window.innerHeight
       let threshold = document.documentElement.offsetHeight
       if ((Math.ceil(scrolledSoFar) === threshold)) {

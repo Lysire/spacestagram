@@ -5,11 +5,11 @@
   >
     <card-image :src="src" />
 
-    <v-card-title>
+    <v-card-title class="text-body-1">
       {{ title }}
     </v-card-title>
 
-    <v-card-subtitle>
+    <v-card-subtitle class="text-subtitle-2">
       {{ date }}
     </v-card-subtitle>
 
